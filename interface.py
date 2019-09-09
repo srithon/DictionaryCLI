@@ -34,7 +34,10 @@ class DictionaryAPIInterface:
                     pretty_definition += word
                 else:
                     word = word.split('|')
-                    if word[1][-1] != '}':
+                    if len(word) == 1:
+                        word = word[0][word[0].find('}') + 1:]
+                        pretty_definition += word
+                    elif word[1][-1] != '}':
                         pretty_definition += word[1]
                     else:
                         pretty_definition += word[1][:-1]
@@ -49,7 +52,7 @@ x = DictionaryAPIInterface()
 x.set_mode('d')
 print(x.request('hello'))
 
-word = ''
+word = input('Word: ')
 while word != 'exit':
-    word = input('Word: ')
     print(x.request(word))
+    word = input('Word: ')
