@@ -21,9 +21,25 @@ class DictionaryAPIInterface:
         for part in definitions_base:
             for section in part:
                 definitions.append(section[1]['dt'][0][1])
-        output = f'{word}, {word_class}\n'
+        output = f'\"{word}\": {word_class}\n'
         for definition in definitions:
-            output += definition
+            definition = definition[4:].rstrip()
+            definition = definition.split(' ')
+
+            pretty_definition = ''
+
+            for word in definition:
+                # print(word)
+                if word[0] != '{':
+                    pretty_definition += word
+                else:
+                    word = word.split('|')
+                    if word[1][-1] != '}':
+                        pretty_definition += word[1]
+                    else:
+                        pretty_definition += word[1][:-1]
+                pretty_definition += ' '
+            output += pretty_definition
             output += '\n'
         return output
     def set_mode(self, mode):
