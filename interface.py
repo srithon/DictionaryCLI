@@ -48,3 +48,8 @@ class DictionaryAPIInterface:
 x = DictionaryAPIInterface()
 x.set_mode('d')
 print(x.request('hello'))
+
+word = ''
+while word != 'exit':
+    word = input('Word: ')
+    print(x.request(word))
