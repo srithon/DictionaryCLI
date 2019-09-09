@@ -10,7 +10,7 @@ class DictionaryAPIInterface:
         self.session = requests.Session()
     def request(self, word):
         key = self.keys_dict['dict-key'] if self.mode == 'd' else self.keys_dict['thes-key']
-        response = self.session.get(f'https://www.dictionaryapi.com/api/v3/references/collegiate/json/voluminous?key={key}')
+        response = self.session.get(f'https://www.dictionaryapi.com/api/v3/references/collegiate/json/{word}?key={key}')
         try:
             response = response.json()[0]
         except Exception as e:
